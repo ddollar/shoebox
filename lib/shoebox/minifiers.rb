@@ -1,0 +1,1 @@
+module Shoebox::Minifiers; end
