@@ -37,7 +37,7 @@ Usage
     <%= shoebox_styles(:print) %>
   </head>
 
-Author:
+Author
 
   David Dollar
   ddollar@gmail.com
