@@ -10,7 +10,17 @@ require 'shoebox/minifiers/javascript'
 
 $:.unshift(File.join(File.dirname(__FILE__), '..', 'app'))
 
+class RailsEnvironmentMock
+  def development?
+    false
+  end
+end
+
 module Rails
+  def self.env
+    RailsEnvironmentMock.new
+  end
+
   def self.root
     File.join(File.dirname(__FILE__), 'fixtures')
   end
