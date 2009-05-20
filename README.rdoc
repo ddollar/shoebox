@@ -1,13 +1,44 @@
-Shoebox
-=======
+Shoebox allows you to keep your scripts and styles as first-class citizens in your Rails application.
 
-Introduction goes here.
+Shoebox also helps you separate script and style logic down to controller-level granularity.
 
+Installation
 
-Example
-=======
+ # install the plugin
+ $ script/plugin install git://github.com/ddollar/shoebox.git
 
-Example goes here.
+Setup
 
+ # css
+ # can use media types in the filename like below
+ app/
+   styles/
+     application/
+       test.css
+       test.screen.css
+     users/
+       more.css
+       more.print.css
 
-Copyright (c) 2009 [name of plugin creator], released under the MIT license
+  # javascript
+  app/
+    scripts/
+      application/
+        global.js
+      users/
+        flashy.js
+
+Usage
+
+  # views/layouts/application.html.erb
+  <head>
+    <%= shoebox_scripts        %>
+    <%= shoebox_styles         %> # defaults to screen
+    <%= shoebox_styles(:print) %>
+  </head>
+
+Author:
+
+  David Dollar
+  ddollar@gmail.com
+  @ddollar
