@@ -7,7 +7,7 @@ describe Shoebox::Configuration do
   end
   
   it 'should have minify default to false' do
-    Shoebox.config.minify.should be_false
+    @config.minify.should be_false
   end
 
 end
