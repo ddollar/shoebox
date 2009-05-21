@@ -40,7 +40,7 @@ describe Shoebox::StylesController do
     end
 
     it 'should process sass files' do
-      @controller.should_receive(:render_buffer).with(/background-color:#000/)
+      @controller.should_receive(:render_buffer).with(/background-color:\s*#000/)
       @controller.index
     end
 
