@@ -3,15 +3,24 @@ class Shoebox::ScriptsController < ActionController::Base
   include Shoebox::Common
 
   def index
-    buffer = collapse_files(files)
-    buffer = minify(buffer) if Shoebox.config.minify
-    render_buffer buffer
+    buffer = Rails.cache.fetch(cache_key) { build } if Shoebox.config.cache
+    render_buffer(buffer || build)
   end
 
 private ######################################################################
 
   def controller
     params[:name]
+  end
+
+  def cache_key
+    controller
+  end
+
+  def build
+    buffer = collapse_files(files)
+    buffer = minify(buffer) if Shoebox.config.minify
+    buffer
   end
 
   def collapse_files(files)

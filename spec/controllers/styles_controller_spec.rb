@@ -53,6 +53,14 @@ describe Shoebox::StylesController do
       @controller.index
     end
 
+    it 'should cache when set' do
+      Shoebox.config.cache = true
+      @controller.index
+      @controller.should_receive(:build).never
+      @controller.should_receive(:render_buffer).with(/application.css/)
+      @controller.index
+    end
+
   end
 
 end
