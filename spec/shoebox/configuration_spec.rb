@@ -6,6 +6,10 @@ describe Shoebox::Configuration do
     @config = Shoebox::Configuration.new
   end
   
+  it 'should have cache default to false' do
+    @config.cache.should be_false
+  end
+
   it 'should have minify default to false' do
     @config.minify.should be_false
   end
