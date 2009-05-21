@@ -14,6 +14,12 @@ private ######################################################################
     params[:name]
   end
 
+  def collapse_files(files)
+    files.inject('') do |buffer, file|
+      buffer << File.read(file) << "\n"
+    end
+  end
+
   def files
     support_files(:scripts).select do |filename|
       dir  = File.dirname(filename).split('/').last

@@ -18,6 +18,15 @@ private ######################################################################
     params[:media]
   end
 
+  def collapse_files(files)
+    files.inject('') do |buffer, file|
+      buffer << case File.extname(file)
+        when '.sass' then require 'sass'; Sass::Engine.new(File.read(file)).render
+        else File.read(file)
+      end << "\n"
+    end
+  end
+
   def files
     support_files(:styles).select do |filename|
       dir  = File.dirname(filename).split('/').last

@@ -39,6 +39,11 @@ describe Shoebox::StylesController do
       @controller.index
     end
 
+    it 'should process sass files' do
+      @controller.should_receive(:render_buffer).with(/background-color:#000/)
+      @controller.index
+    end
+
     it 'should attempt to minify the output when the configuration is set' do
       Shoebox.config.minify = true
       minifier = mock(@minifier_class)

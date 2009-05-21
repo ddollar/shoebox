@@ -1,11 +1,5 @@
 module Shoebox::Common
 
-  def collapse_files(files)
-    files.inject('') do |buffer, file|
-      buffer << File.read(file) << "\n"
-    end
-  end
-
   def render_buffer(buffer)
     render :text => buffer
   end

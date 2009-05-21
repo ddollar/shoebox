@@ -16,6 +16,7 @@ Setup
      application/
        test.css
        test.screen.css
+       test.sass
      users/
        more.css
        more.print.css
