@@ -3,6 +3,7 @@ require File.join(File.dirname(__FILE__), '..', 'spec_helper')
 describe Shoebox::StylesController do
 
   before(:each) do
+    Shoebox.config.reset
     @controller = Shoebox::StylesController.new
     @controller.stub(:render)
     @minifier_class = Shoebox::Minifiers::CSS

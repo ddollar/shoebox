@@ -14,4 +14,8 @@ describe Shoebox::Configuration do
     @config.minify.should be_false
   end
 
+  it 'should be able to reset' do
+    @config.should respond_to(:reset)
+  end
+
 end
