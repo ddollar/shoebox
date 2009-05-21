@@ -5,7 +5,7 @@ describe Shoebox::Configuration do
   before(:each) do
     @config = Shoebox::Configuration.new
   end
-  
+
   it 'should have cache default to false' do
     @config.cache.should be_false
   end
