@@ -2,6 +2,8 @@ Shoebox allows you to keep your scripts and styles as first-class citizens in yo
 
 Shoebox also helps you separate script and style logic down to controller-level granularity.
 
+Shoebox can optionally minify both CSS and Javascript.
+
 Installation
 
  # install the plugin
@@ -37,6 +39,9 @@ Usage
     <%= shoebox_styles         %> # defaults to screen
     <%= shoebox_styles(:print) %>
   </head>
+
+  # config/environments/production.rb
+  Shoebox.config.minify = true
 
 Author
 
