@@ -5,9 +5,17 @@ describe Shoebox::Configuration do
   before(:each) do
     @config = Shoebox::Configuration.new
   end
-  
+
+  it 'should have cache default to false' do
+    @config.cache.should be_false
+  end
+
   it 'should have minify default to false' do
     @config.minify.should be_false
+  end
+
+  it 'should be able to reset' do
+    @config.should respond_to(:reset)
   end
 
 end

@@ -16,7 +16,19 @@ class RailsEnvironmentMock
   end
 end
 
+class RailsCacheMock
+  def self.fetch(key)
+    @cache ||= {}
+    @cache[key] = yield unless @cache.has_key?(key)
+    @cache[key]
+  end
+end
+
 module Rails
+  def self.cache
+    RailsCacheMock
+  end
+
   def self.env
     RailsEnvironmentMock.new
   end

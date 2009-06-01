@@ -3,6 +3,7 @@ require File.join(File.dirname(__FILE__), '..', 'spec_helper')
 describe Shoebox::ScriptsController do
 
   before(:each) do
+    Shoebox.config.reset
     @controller = Shoebox::ScriptsController.new
     @controller.stub(:render)
     @minifier_class = Shoebox::Minifiers::Javascript
@@ -34,6 +35,14 @@ describe Shoebox::ScriptsController do
       minifier = mock(@minifier_class)
       minifier.should_receive(:minify)
       @minifier_class.should_receive(:new).and_return(minifier)
+      @controller.index
+    end
+
+    it 'should cache when set' do
+      Shoebox.config.cache = true
+      @controller.index
+      @controller.should_receive(:build).never
+      @controller.should_receive(:render_buffer).with(/application.js/)
       @controller.index
     end
 

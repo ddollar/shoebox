@@ -3,6 +3,7 @@ require File.join(File.dirname(__FILE__), '..', 'spec_helper')
 describe Shoebox::StylesController do
 
   before(:each) do
+    Shoebox.config.reset
     @controller = Shoebox::StylesController.new
     @controller.stub(:render)
     @minifier_class = Shoebox::Minifiers::CSS
@@ -40,7 +41,7 @@ describe Shoebox::StylesController do
     end
 
     it 'should process sass files' do
-      @controller.should_receive(:render_buffer).with(/background-color:#000/)
+      @controller.should_receive(:render_buffer).with(/background-color:\s*#000/)
       @controller.index
     end
 
@@ -49,6 +50,14 @@ describe Shoebox::StylesController do
       minifier = mock(@minifier_class)
       minifier.should_receive(:minify)
       @minifier_class.should_receive(:new).and_return(minifier)
+      @controller.index
+    end
+
+    it 'should cache when set' do
+      Shoebox.config.cache = true
+      @controller.index
+      @controller.should_receive(:build).never
+      @controller.should_receive(:render_buffer).with(/application.css/)
       @controller.index
     end
 
