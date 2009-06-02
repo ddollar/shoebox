@@ -37,6 +37,10 @@ private ######################################################################
     end
   end
 
+  def mime_type
+    'text/javascript'
+  end
+
   def minify(buffer)
     Shoebox::Minifiers::Javascript.new(buffer).minify
   end

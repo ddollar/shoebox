@@ -51,6 +51,10 @@ private ######################################################################
     end
   end
 
+  def mime_type
+    'text/css'
+  end
+
   def minify(buffer)
     Shoebox::Minifiers::CSS.new(buffer).minify
   end

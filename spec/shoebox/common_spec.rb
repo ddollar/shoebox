@@ -10,7 +10,8 @@ describe Shoebox::Common do
   describe 'with #render_buffer' do
 
     it 'should render the buffer as text' do
-      @object.should_receive(:render).with(:text => 'foo')
+      @object.should_receive(:mime_type).and_return('text/foo')
+      @object.should_receive(:render).with(:text => 'foo', :content_type => 'text/foo')
       @object.render_buffer('foo')
     end
 
