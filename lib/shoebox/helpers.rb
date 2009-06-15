@@ -3,7 +3,7 @@ module Shoebox::Helpers
   def shoebox_scripts
     src  = "/shoebox/scripts/#{controller.controller_name}.js"
     src << "?#{Time.now.to_i}" if Rails.env.development?
-    tag 'script', { :type => 'text/javascript', :src => src  }
+    content_tag 'script', '', { :type => 'text/javascript', :src => src  }
   end
 
   def shoebox_styles(media = :screen)
