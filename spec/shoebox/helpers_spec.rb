@@ -14,7 +14,7 @@ describe Shoebox::Helpers do
 
     it 'should render appropriately' do
       src = '/shoebox/scripts/users.js'
-      @object.should_receive(:tag).with('script', hash_including(:src => src))
+      @object.should_receive(:content_tag).with('script', '', hash_including(:src => src))
       @object.shoebox_scripts
     end
 
