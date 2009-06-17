@@ -19,6 +19,7 @@ Setup
        test.css
        test.screen.css
        test.sass
+       test.less
      users/
        more.css
        more.print.css

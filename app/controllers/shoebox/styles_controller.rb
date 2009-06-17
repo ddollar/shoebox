@@ -29,9 +29,11 @@ private ######################################################################
 
   def collapse_files(files)
     files.inject('') do |buffer, file|
+      data = File.read(file)
       buffer << case File.extname(file)
-        when '.sass' then require 'sass'; Sass::Engine.new(File.read(file)).render
-        else File.read(file)
+        when '.sass' then require 'sass'; Sass::Engine.new(data).render
+        when '.less' then require 'less'; Less::Engine.new(data).to_css(:desc)
+        else data
       end << "\n"
     end
   end

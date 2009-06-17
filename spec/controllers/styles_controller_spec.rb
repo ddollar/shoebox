@@ -45,6 +45,11 @@ describe Shoebox::StylesController do
       @controller.index
     end
 
+    it 'should process less files' do
+      @controller.should_receive(:render_buffer).with(/border-bottom:\s*5px/)
+      @controller.index
+    end
+
     it 'should attempt to minify the output when the configuration is set' do
       Shoebox.config.minify = true
       minifier = mock(@minifier_class)
