@@ -32,7 +32,7 @@ private ######################################################################
       data = File.read(file)
       buffer << case File.extname(file)
         when '.sass' then require 'sass'; Sass::Engine.new(data).render
-        when '.less' then require 'less'; Less::Engine.new(data).to_css(:desc)
+        when '.less' then require 'less'; Less::Engine.new(data).to_css
         else data
       end << "\n"
     end
