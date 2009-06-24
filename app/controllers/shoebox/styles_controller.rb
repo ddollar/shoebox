@@ -40,10 +40,8 @@ private ######################################################################
 
   def files
     support_files(:styles).select do |filename|
-      dir  = File.dirname(filename).split('/').last
+      next(false) unless File.dirname(filename).split('/').last == controller
       name = File.basename(filename)
-
-      next(false) unless [ 'application', controller ].include?(dir)
 
       case (parts = name.split('.')).length
         when 1 then raise "Unable to parse filename: #{filename}"

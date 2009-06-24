@@ -5,17 +5,14 @@ describe Shoebox::Helpers do
   before(:each) do
     @object = Object.new
     @object.extend Shoebox::Helpers
-    controller = mock
-    controller.should_receive(:controller_name).and_return('users')
-    @object.should_receive(:controller).and_return(controller)
   end
 
   describe 'with #shoebox_scripts' do
 
     it 'should render appropriately' do
-      src = '/shoebox/scripts/users.js'
-      @object.should_receive(:content_tag).with('script', '', hash_including(:src => src))
-      @object.shoebox_scripts
+      @object.stub(:shoebox_controller).and_return('users')
+      @object.shoebox_scripts.should include('/shoebox/scripts/application.js')
+      @object.shoebox_scripts.should include('/shoebox/scripts/users.js')
     end
 
   end
@@ -23,15 +20,14 @@ describe Shoebox::Helpers do
   describe 'with #shoebox_styles' do
 
     it 'should render appropriately' do
-      href = '/shoebox/styles/users/screen.css'
-      @object.should_receive(:tag).with('link', hash_including(:href => href))
-      @object.shoebox_styles
+      @object.stub(:shoebox_controller).and_return('users')
+      @object.shoebox_styles.should include('/shoebox/styles/application/screen.css')
+      @object.shoebox_styles.should include('/shoebox/styles/users/screen.css')
     end
 
     it 'should take media type as an arg' do
-      href = '/shoebox/styles/users/print.css'
-      @object.should_receive(:tag).with('link', hash_including(:href => href))
-      @object.shoebox_styles(:print)
+      @object.stub(:shoebox_controller).and_return('users')
+      @object.shoebox_styles(:print).should include('/shoebox/styles/users/print.css')
     end
 
   end

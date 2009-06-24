@@ -15,11 +15,6 @@ describe Shoebox::StylesController do
       @controller.stub('params').and_return({ :name => 'users', :media => 'screen' })
     end
 
-    it 'should render the application styles' do
-      @controller.should_receive(:render_buffer).with(/application.css/)
-      @controller.index
-    end
-
     it 'should render the user styles' do
       @controller.should_receive(:render_buffer).with(/users.css/)
       @controller.index
@@ -62,7 +57,7 @@ describe Shoebox::StylesController do
       Shoebox.config.cache = true
       @controller.index
       @controller.should_receive(:build).never
-      @controller.should_receive(:render_buffer).with(/application.css/)
+      @controller.should_receive(:render_buffer).with(/users.css/)
       @controller.index
     end
 

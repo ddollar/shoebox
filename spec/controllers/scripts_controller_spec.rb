@@ -15,11 +15,6 @@ describe Shoebox::ScriptsController do
       @controller.stub('params').and_return({ :name => 'users' })
     end
 
-    it 'should render the application scripts' do
-      @controller.should_receive(:render_buffer).with(/application.js/)
-      @controller.index
-    end
-
     it 'should render the user scripts' do
       @controller.should_receive(:render_buffer).with(/users.js/)
       @controller.index
@@ -42,7 +37,7 @@ describe Shoebox::ScriptsController do
       Shoebox.config.cache = true
       @controller.index
       @controller.should_receive(:build).never
-      @controller.should_receive(:render_buffer).with(/application.js/)
+      @controller.should_receive(:render_buffer).with(/users.js/)
       @controller.index
     end
 

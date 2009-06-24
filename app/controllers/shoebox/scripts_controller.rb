@@ -31,9 +31,7 @@ private ######################################################################
 
   def files
     support_files(:scripts).select do |filename|
-      dir  = File.dirname(filename).split('/').last
-      name = File.basename(filename)
-      next([ 'application', controller ].include?(dir))
+      File.dirname(filename).split('/').last == controller
     end
   end
 
