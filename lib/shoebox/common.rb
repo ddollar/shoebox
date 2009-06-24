@@ -5,7 +5,11 @@ module Shoebox::Common
   end
 
   def support_files(type)
-    Dir[File.join(Rails.root, 'app', type.to_s, '**', '*')]
+    Dir[File.join(base_path(type), '**', '*')]
+  end
+
+  def base_path(type)
+    File.join(Rails.root, 'app', type.to_s)
   end
 
 end

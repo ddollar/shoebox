@@ -31,8 +31,8 @@ private ######################################################################
     files.inject('') do |buffer, file|
       data = File.read(file)
       buffer << case File.extname(file)
-        when '.sass' then require 'sass'; Sass::Engine.new(data).render
-        when '.less' then require 'less'; Less::Engine.new(data).to_css
+        when '.sass' then render_sass(data)
+        when '.less' then render_less(data)
         else data
       end << "\n"
     end
@@ -57,6 +57,23 @@ private ######################################################################
 
   def minify(buffer)
     Shoebox::Minifiers::CSS.new(buffer).minify
+  end
+
+private ######################################################################
+
+  def load_paths
+    [ File.join(base_path(:styles), 'application'),
+      File.join(base_path(:styles), controller) ]
+  end
+
+  def render_less(data)
+    require 'less'
+    Less::Engine.new(data).to_css
+  end
+
+  def render_sass(data)
+    require 'sass'
+    Sass::Engine.new(data, :load_paths => load_paths).render
   end
 
 end

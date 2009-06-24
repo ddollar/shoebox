@@ -40,6 +40,11 @@ describe Shoebox::StylesController do
       @controller.index
     end
 
+    it 'should process sass imports' do
+      @controller.should_receive(:render_buffer).with(/float:\simport_test/)
+      @controller.index
+    end
+
     it 'should process less files' do
       @controller.should_receive(:render_buffer).with(/border-bottom:\s*5px/)
       @controller.index
