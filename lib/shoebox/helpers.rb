@@ -17,7 +17,7 @@ module Shoebox::Helpers
 
   def shoebox_styles_tag(controller, media)
     href = shoebox_styles_uri(controller, media)
-    %{ <link rel="stylesheet" media="#{media}" href="#{href}" /> }
+    %{ <link type="text/css" rel="stylesheet" media="#{media}" href="#{href}" /> }
   end
 
   def shoebox_scripts_uri(controller)
