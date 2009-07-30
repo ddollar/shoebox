@@ -10,7 +10,7 @@ class Shoebox::ScriptsController < ActionController::Base
 private ######################################################################
 
   def controller
-    params[:name]
+    params[:controller]
   end
 
   def cache_key
