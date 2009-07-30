@@ -12,7 +12,7 @@ describe Shoebox::ScriptsController do
   describe 'with user controller' do
 
     before(:each) do
-      @controller.stub('params').and_return({ :name => 'users' })
+      @controller.stub('params').and_return({ :source_controller => 'users' })
     end
 
     it 'should render the user scripts' do

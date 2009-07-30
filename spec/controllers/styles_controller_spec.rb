@@ -12,7 +12,7 @@ describe Shoebox::StylesController do
   describe 'with user controller and screen media' do
 
     before(:each) do
-      @controller.stub('params').and_return({ :name => 'users', :media => 'screen' })
+      @controller.stub('params').and_return({ :source_controller => 'users', :media => 'screen' })
     end
 
     it 'should render the user styles' do

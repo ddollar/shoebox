@@ -10,7 +10,7 @@ class Shoebox::StylesController < ActionController::Base
 private ######################################################################
 
   def controller
-    params[:controller]
+    params[:source_controller]
   end
 
   def media
