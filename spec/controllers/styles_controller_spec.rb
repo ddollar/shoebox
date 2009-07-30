@@ -66,6 +66,12 @@ describe Shoebox::StylesController do
       @controller.index
     end
 
+    it 'should handle single files' do
+      @controller.stub('params').and_return({ :source_controller => 'users', :media => 'screen', :filename => 'users-single' })
+      @controller.should_receive(:render_buffer).with("users-single.css\n")
+      @controller.index
+    end
+
   end
 
 end

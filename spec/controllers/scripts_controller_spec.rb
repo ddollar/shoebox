@@ -41,6 +41,12 @@ describe Shoebox::ScriptsController do
       @controller.index
     end
 
+    it 'should handle single files' do
+      @controller.stub('params').and_return({ :source_controller => 'users', :filename => 'users-single' })
+      @controller.should_receive(:render_buffer).with("users-single.js\n")
+      @controller.index
+    end
+
   end
 
 end

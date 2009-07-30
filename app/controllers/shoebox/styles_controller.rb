@@ -39,15 +39,8 @@ private ######################################################################
   end
 
   def files
-    support_files(:styles).select do |filename|
-      next(false) unless File.dirname(filename).split('/').last == controller
-      name = File.basename(filename)
-
-      case (parts = name.split('.')).length
-        when 1 then raise "Unable to parse filename: #{filename}"
-        when 2 then next(true)
-        else        next(true) if parts[-2] == media.to_s
-      end
+    support_files(:styles, controller).select do |filename|
+      valid_file?(filename)
     end
   end
 
@@ -59,11 +52,26 @@ private ######################################################################
     Shoebox::Minifiers::CSS.new(buffer).minify
   end
 
+  def valid_file?(filename)
+    name = File.basename(filename)
+
+    return false unless File.dirname(filename).split('/').last == controller
+    return false if params[:filename] && name.split('.').first != params[:filename]
+
+    case (parts = name.split('.')).length
+      when 1 then raise "Unable to parse filename: #{filename}"
+      when 2 then return true
+      else        return false unless parts[-2] == media.to_s
+    end
+
+    true
+  end
+
 private ######################################################################
 
   def load_paths
-    [ File.join(base_path(:styles), 'application'),
-      File.join(base_path(:styles), controller) ]
+    [ File.join(shoebox_base_path(:styles), 'application'),
+      File.join(shoebox_base_path(:styles), controller) ]
   end
 
   def render_less(data)

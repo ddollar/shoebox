@@ -30,8 +30,8 @@ private ######################################################################
   end
 
   def files
-    support_files(:scripts).select do |filename|
-      File.dirname(filename).split('/').last == controller
+    support_files(:scripts, controller).select do |filename|
+      valid_file?(filename)
     end
   end
 
@@ -41,6 +41,12 @@ private ######################################################################
 
   def minify(buffer)
     Shoebox::Minifiers::Javascript.new(buffer).minify
+  end
+
+  def valid_file?(filename)
+    name = File.basename(filename)
+    return false if params[:filename] && name.split('.').first != params[:filename]
+    true
   end
 
 end
