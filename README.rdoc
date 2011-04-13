@@ -1,3 +1,10 @@
+UNMAINTAINED
+
+I have abandoned this project in favor of http://github.com/ddollar/asset-resource
+
+
+
+
 Shoebox allows you to keep your scripts and styles as first-class citizens in your Rails application.
 
 Shoebox also helps you separate script and style logic down to controller-level granularity.
